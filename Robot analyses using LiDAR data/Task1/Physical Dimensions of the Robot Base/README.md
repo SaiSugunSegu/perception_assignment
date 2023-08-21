@@ -18,4 +18,7 @@ We can use [PlotJuggler](https://github.com/facontidavide/PlotJuggler) to estima
 
 ### _Estimated Wheel Track is approx 0.81 m (can be prone to noise due to noise in rpm)_
 
+- We can Evaluate the same with Foxglove, and measure distance between 2 links
+<img src ="https://github.com/SaiSugunSegu/perception_sugun_dex/assets/50354583/a7e7837b-6721-4102-8541-b09a2ecd3f2f">
+
 
