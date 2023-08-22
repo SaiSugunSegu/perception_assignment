@@ -11,23 +11,64 @@
 ## Intrincics Calibration 
 
 ### Step 1: Understanding Pinhole Camera Model and Distortion Model.
+- <img src = "https://github.com/SaiSugunSegu/perception_sugun_dex/assets/50354583/adb8efb6-23ce-412c-9c52-d5574569a7dc">
+
+The pinhole camera model is a simple representation of how light creates an inverted image on a surface through a small hole. It doesn't require a lens, forms inverted images, has a large depth of field, and longer exposures. It's a basic concept in imaging despite its limitations.
+
+- **Camera Model** - Pinhole Model - Camera Parameters are `fx`, `fy` (focal length) and `cx`, `cy` (principal points), and `s` (scale in analog cameras).
+- **Distortion Model** - Deviations can arise due to imperfections in camera lenses or the camera's sensor.
+
+- There are two kinds of distortion models:
+- **Brown-Conrady (Radial-Tangen)**: k1, k2, p1, p2, p3
+  - Barrel distortion
+  - Pincushion Distortion
+- **Kannala-Brandt**: k1, k2, k3, k4.
+  - for wide angle, fish eye lens.
+
+  
+
 ### Step 2: Using DLT (Zhang's method) and estimate 
-<img src = "https://github.com/SaiSugunSegu/perception_sugun_dex/assets/50354583/adb8efb6-23ce-412c-9c52-d5574569a7dc">
+  - We can use Direct Linear Transform to estimate pixel (2D) to checker points (3D) mapping.
+  - In this exercise, we will use the OpenCV function to estimate the camera parameters and Distortion parameters by minimizing the reprojection error.
+
 <img src = "https://github.com/SaiSugunSegu/perception_sugun_dex/assets/50354583/4e527818-bfee-4ced-84cf-041d7e73ab19">
 <img src = "https://github.com/SaiSugunSegu/perception_sugun_dex/assets/50354583/c6b4fc54-1408-4673-a2fb-770607ae38d6">
 
 ### Step 3: Calibration Using Opencv and Charuco markers.
-
+- We use the Charuco board to collect corners and IDs, I personally prefer April Tags to make detection robust detection in rotation.
+  
 <img src="https://github.com/SaiSugunSegu/perception_sugun_dex/assets/50354583/02bf3ec3-0fe2-4958-9989-6940a68ab240">
-
-
 <img src="https://github.com/SaiSugunSegu/perception_sugun_dex/assets/50354583/8cd51e3b-5609-4322-b6a2-3638e9c1a62a">
+
+
+- Use the parameters to rectify (undistort) the image.
+  - See the barreled board became straight after rectification.
+<p align ="center" >
+<img src="https://github.com/SaiSugunSegu/perception_sugun_dex/assets/50354583/52252ffb-c7fb-4787-8190-3c04df0a36ee">
+</p>
+
+### Step 4: Validate the Intrinsics using Reprojection Error
+- Opencv inherently minimizes re-projection error by projecting the pixel back using transformation estimate vs. target pixels (charuko config).
+- **Re-Projection Error of less than 1 pixel is considered good calibration, we got 0.3 pixels**
+
+<p align ="center" >
+<img src="https://github.com/SaiSugunSegu/perception_sugun_dex/assets/50354583/c98f101c-9bc6-4abf-8202-c3e6e3290eee">
+</p>
+
 
 ## Stereo Rectification 
 
 ### Step 1: Image Matching
+- We should use Good Feature Detectors and Feature Descriptors for detection and decription.
+- SIFT - Scale Invariant Feature Transform
+- SURF - Speeded Up Robust Feature
+- ORB - Oriented Fast and Rotated Brief.
+
+  - These are good enough detector and descriptor, we get key points from this.
 
 <img src="https://github.com/SaiSugunSegu/perception_sugun_dex/assets/50354583/16a85f2d-b3c5-4851-b471-9742dddfe98e">
+
+- We use simple Hamming distance to do nearest neihourhood search.
 
 ### Step 2: Baseline (R and T) from Essential Matrix
 ### Step 3: Disparity Map and Depth Map Using Triangulation.
