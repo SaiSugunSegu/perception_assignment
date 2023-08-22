@@ -2,6 +2,11 @@
 
 - In this exercise, we have a Horizontal Stereo Normal camera, and we will calibrate and understand the Intrinsics of each camera and rectify the Images.
 - We will then apply Stereo Rectification to create a Disparity Map.
+ - Intrinsics Parameter Estimation and Image Rectification.
+ - Imaging matching and finding Correspondances.
+ - Baseline estimation using Essential Matrix decomposition.
+ - Disparity calculation for Depth Map.
+
 
 ## Intrincics Calibration 
 
