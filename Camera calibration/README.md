@@ -64,13 +64,17 @@ The pinhole camera model is a simple representation of how light creates an inve
 - SURF - Speeded Up Robust Feature
 - ORB - Oriented Fast and Rotated Brief.
 
-  - These are good enough detector and descriptor, we get key points from this.
+  - These are good enough detector and descriptor, we get key points from this. if we get the less correspondences, we can use the charuco cornors as keypoints.
 
 <img src="https://github.com/SaiSugunSegu/perception_sugun_dex/assets/50354583/16a85f2d-b3c5-4851-b471-9742dddfe98e">
 
 - We use simple Hamming distance to do nearest neihourhood search.
 
-### Step 2: Baseline (R and T) from Essential Matrix
+### Step 2: Baseline (R and T) from Essential Matrix.
+- We know the intrincics, so, we can estimate Essential Matrix and decompose it with SVD(singular value decomposition) and find R and t between cam1 to cam2.
+- We need to estimate b (baseline) to find disparity.
+
+  
 ### Step 3: Disparity Map and Depth Map Using Triangulation.
 <img src = "https://github.com/SaiSugunSegu/perception_sugun_dex/assets/50354583/39d1753f-7c71-4efb-be5b-db0a08d81b27">
 <img src = "https://github.com/SaiSugunSegu/perception_sugun_dex/assets/50354583/64465aa4-1337-4b1f-9b37-290cdd5670f6">
