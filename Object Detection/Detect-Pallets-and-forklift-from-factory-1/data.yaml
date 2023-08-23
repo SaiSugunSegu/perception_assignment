@@ -1,0 +1,13 @@
+names:
+- Pallets-and-forklifts
+- forlift
+nc: 2
+roboflow:
+  license: CC BY 4.0
+  project: detect-pallets-and-forklift-from-factory
+  url: https://universe.roboflow.com/sugun-segu-6mcs1/detect-pallets-and-forklift-from-factory/dataset/1
+  version: 1
+  workspace: sugun-segu-6mcs1
+test: ../test/images
+train: Detect-Pallets-and-forklift-from-factory-1/train/images
+val: Detect-Pallets-and-forklift-from-factory-1/valid/images
